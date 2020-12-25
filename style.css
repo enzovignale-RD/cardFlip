@@ -1,0 +1,111 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background: #f2f2f2;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  perspective: 1000px;
+  
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+img {
+  width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+$chip-img: "https://usa.visa.com/dam/VCOM/regional/na/us/pay-with-visa/images/card-chip-800x450.png";
+
+
+.card {
+  position: relative;
+  width: 400px;
+  height: 240px;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  cursor: pointer;
+  // will-change: transform;
+  transform: rotateY(-0deg);
+  
+  .side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    // backface-visibility: hidden;
+    border-radius: 5px;
+    transition: background-position 0.6s;
+    transform-style: preserve-3d;
+    // will-change: background-position;
+    padding: 25px;
+  }
+  
+  .front-side {
+    transform: translateZ(1px);
+     transition-delay: 0.3s;
+     background: 
+       url($chip-img) right 40%/120px no-repeat,
+       radial-gradient(circle, lighten(#2c303a, 40%), transparent) right bottom/200% 200% no-repeat,
+       linear-gradient(#2c303a, #2c303a);
+    
+    .card-logo {
+      width: 200px;
+      position: absolute;
+      top: -65px;
+      left: 20px;
+    }
+    
+    .card-holder-name {
+      margin-top: 110px;
+      margin-bottom: 5px;
+      color: rgba(#ddd, 0.8);
+      font-size: 1.2em;
+    }
+    
+    .card-number {
+      font-size: 1.8em;
+      text-shadow: 0 0 2px #444857;
+      color: #031121;
+      
+      b {
+        margin-right: 15px;
+      }
+    }
+    
+    .exp-date {
+      letter-spacing: 1px;
+    }
+  }
+  
+  .back-side {
+     // background: #090;
+     background: 
+       radial-gradient(circle, rgba(#7e849e, 0.6), transparent) left top/200% 200% no-repeat,
+       url("https://support.tradeapp.com/hc/article_attachments/360007169218/CC_back_EN.png") center center/127% auto no-repeat;
+       // linear-gradient(#131417, #131417);
+     transform: rotateY(180deg);
+  }
+  
+  &.flipped {
+    transform: rotateY(180deg);
+  
+    .front-side {
+      background-position: right 40%, left top;
+      transition-delay: 0s;
+    }
+    
+    .back-side {
+      background-position: right bottom, center center;
+      transition-delay: 0.3s;
+    }
+  }
+}
